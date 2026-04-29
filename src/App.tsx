@@ -162,6 +162,17 @@ function formatStatValue(value: number, decimals: number, suffix: string) {
 }
 
 function formatAmount(amount: number) {
+  if (amount >= 100_000_000) {
+    const billionUnit = Math.floor(amount / 100_000_000)
+    const remainderManwon = Math.round((amount % 100_000_000) / 10_000)
+
+    if (remainderManwon === 0) {
+      return `${moneyFormatter.format(billionUnit)}억`
+    }
+
+    return `${moneyFormatter.format(billionUnit)}억 ${moneyFormatter.format(remainderManwon)}만원`
+  }
+
   return `${moneyFormatter.format(Math.round(amount / 10_000))}만원`
 }
 
