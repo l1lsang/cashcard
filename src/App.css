@@ -396,12 +396,29 @@ textarea::placeholder {
 
   .consultation-table th {
     height: 76px;
-    font-size: 21px;
+    font-size: 14px;
   }
 
   .consultation-table td {
-    height: 88px;
-    font-size: 21px;
+    height: 78px;
+    padding: 0 3px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .consultation-list {
+    overflow-x: visible;
+  }
+
+  .consultation-table {
+    min-width: 0;
+  }
+
+  .payment-status {
+    min-width: 46px;
+    min-height: 28px;
+    padding: 0 7px;
+    font-size: 11px;
   }
 
   .section-heading h2 {
@@ -411,5 +428,24 @@ textarea::placeholder {
   .section-heading span {
     width: 100%;
     margin-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .consultation-table th {
+    height: 64px;
+    font-size: 12px;
+  }
+
+  .consultation-table td {
+    height: 68px;
+    font-size: 11px;
+  }
+
+  .payment-status {
+    min-width: 40px;
+    min-height: 24px;
+    padding: 0 5px;
+    font-size: 10px;
   }
 }
