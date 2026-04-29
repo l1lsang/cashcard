@@ -337,6 +337,21 @@ textarea::placeholder {
 }
 
 @media (max-width: 760px) {
+  .hero-section {
+    min-height: auto;
+    padding: 14px 12px 22px;
+    background: #f5f7fa;
+  }
+
+  .hero-image {
+    height: auto;
+    max-height: calc(100svh - 36px);
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
+    box-shadow: 0 14px 34px rgba(24, 34, 54, 0.12);
+  }
+
   .trust-section {
     padding: 54px 16px 62px;
   }
@@ -356,10 +371,6 @@ textarea::placeholder {
 
   .field-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero-image {
-    object-position: 57% center;
   }
 
   .booking-form,
