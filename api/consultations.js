@@ -1,7 +1,7 @@
 import { cert, getApps, initializeApp } from 'firebase-admin/app'
 import { FieldValue, getFirestore } from 'firebase-admin/firestore'
 
-const allowedCardTypes = new Set(['신용카드', '법인카드', '체크카드'])
+const allowedOverdueStatuses = new Set(['없음', '있음'])
 
 function getRequiredEnv(name) {
   const value = process.env[name]
@@ -48,11 +48,10 @@ function assertString(value, field, maxLength) {
 }
 
 function normalizeApplication(rawBody) {
-  const cardType = assertString(rawBody.cardType, '카드 종류', 20)
-  const amount = assertString(rawBody.amount, '금액', 80)
+  const overdueStatus = assertString(rawBody.overdueStatus, '카드 연체 유/무', 10)
 
-  if (!allowedCardTypes.has(cardType)) {
-    const error = new Error('지원하지 않는 카드 종류입니다.')
+  if (!allowedOverdueStatuses.has(overdueStatus)) {
+    const error = new Error('카드 연체 유/무 값이 올바르지 않습니다.')
     error.statusCode = 400
     throw error
   }
@@ -60,11 +59,10 @@ function normalizeApplication(rawBody) {
   return {
     name: assertString(rawBody.name, '이름', 30),
     phone: assertString(rawBody.phone, '연락처', 20),
-    requestedDate: assertString(rawBody.requestedDate, '예약 날짜', 20),
-    requestedTime: assertString(rawBody.requestedTime, '예약 시간', 20),
-    amount,
-    cardType,
-    message: assertString(rawBody.message, '상담내용', 1000),
+    birthDate: assertString(rawBody.birthDate, '생년월일', 20),
+    overdueStatus,
+    creditLimit: assertString(rawBody.creditLimit, '신용한도 금액', 80),
+    callTime: assertString(rawBody.callTime, '통화 가능시간', 80),
   }
 }
 
@@ -81,13 +79,11 @@ function buildTelegramMessage(application, clientSubmittedAt) {
     '',
     `이름: ${application.name}`,
     `연락처: ${application.phone}`,
-    `예약 날짜: ${application.requestedDate}`,
-    `예약 시간: ${application.requestedTime}`,
-    `금액: ${application.amount}`,
-    `카드 종류: ${application.cardType}`,
+    `생년월일: ${application.birthDate}`,
+    `카드 연체 유/무: ${application.overdueStatus}`,
+    `신용한도 금액: ${application.creditLimit}`,
+    `통화 가능시간: ${application.callTime}`,
     `신청 시간: ${formatSubmittedAt(clientSubmittedAt)}`,
-    '',
-    `상담내용: ${application.message}`,
   ].join('\n')
 }
 

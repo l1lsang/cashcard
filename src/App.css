@@ -1,6 +1,7 @@
 .cashcard-page {
   min-height: 100svh;
   color: var(--text);
+  overflow-x: hidden;
 }
 
 .hero-section {
@@ -44,6 +45,7 @@
 
 .trust-inner {
   width: min(1120px, 100%);
+  min-width: 0;
   margin: 0 auto;
   text-align: center;
 }
@@ -64,6 +66,7 @@
 }
 
 .stat-card {
+  min-width: 0;
   min-height: 174px;
   padding: 34px 22px;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -75,6 +78,7 @@
 
 .stat-card strong {
   display: block;
+  overflow-wrap: anywhere;
   color: #f5c84b;
   font-size: clamp(42px, 6vw, 74px);
   font-weight: 900;
@@ -83,6 +87,7 @@
 
 .stat-card span {
   display: block;
+  word-break: keep-all;
   margin-top: 18px;
   color: rgba(255, 255, 255, 0.86);
   font-size: 17px;
@@ -154,9 +159,74 @@ label {
   text-align: left;
 }
 
+.choice-field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+}
+
+.choice-field legend {
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-strong);
+}
+
+.segmented-control {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.segmented-control label {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.segmented-control input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.segmented-control span {
+  display: flex;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d8dee9;
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text-strong);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.segmented-control input:checked + span {
+  border-color: var(--accent);
+  background: rgba(33, 98, 151, 0.08);
+  box-shadow: 0 0 0 4px rgba(33, 98, 151, 0.1);
+}
+
+.segmented-control input:focus-visible + span {
+  outline: 3px solid rgba(33, 98, 151, 0.28);
+  outline-offset: 3px;
+}
+
 input,
 select,
 textarea {
+  min-width: 0;
   width: 100%;
   box-sizing: border-box;
   border: 1px solid #d8dee9;
@@ -299,6 +369,7 @@ textarea::placeholder {
   font-size: 25px;
   font-weight: 900;
   text-align: center;
+  word-break: keep-all;
 }
 
 .consultation-table td {
@@ -309,6 +380,8 @@ textarea::placeholder {
   font-size: 25px;
   font-weight: 500;
   text-align: center;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .consultation-table tbody tr:nth-child(even) td {
@@ -353,26 +426,26 @@ textarea::placeholder {
   }
 
   .trust-section {
-    padding: 54px 16px 62px;
+    padding: 48px 10px 54px;
   }
 
   .stat-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px;
   }
 
   .stat-card {
-    min-height: 104px;
-    padding: 18px 6px;
+    min-height: 96px;
+    padding: 16px 4px;
   }
 
   .stat-card strong {
-    font-size: clamp(24px, 8vw, 34px);
+    font-size: clamp(22px, 7.2vw, 32px);
   }
 
   .stat-card span {
     margin-top: 10px;
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1.35;
   }
 
@@ -387,7 +460,7 @@ textarea::placeholder {
 
   .booking-form,
   .list-panel {
-    padding: 18px;
+    padding: 16px;
   }
 
   .list-panel {
@@ -396,13 +469,13 @@ textarea::placeholder {
 
   .consultation-table th {
     height: 76px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .consultation-table td {
     height: 78px;
-    padding: 0 3px;
-    font-size: 13px;
+    padding: 0 2px;
+    font-size: 12px;
     line-height: 1.35;
   }
 
@@ -432,14 +505,39 @@ textarea::placeholder {
 }
 
 @media (max-width: 420px) {
+  .trust-section {
+    padding-inline: 8px;
+  }
+
+  .trust-inner h2 {
+    font-size: 26px;
+  }
+
+  .stat-grid {
+    gap: 4px;
+  }
+
+  .stat-card {
+    min-height: 88px;
+    padding: 14px 3px;
+  }
+
+  .stat-card strong {
+    font-size: clamp(20px, 7vw, 28px);
+  }
+
+  .stat-card span {
+    font-size: 9px;
+  }
+
   .consultation-table th {
     height: 64px;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .consultation-table td {
     height: 68px;
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .payment-status {
@@ -447,5 +545,31 @@ textarea::placeholder {
     min-height: 24px;
     padding: 0 5px;
     font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .booking-section,
+  .history-section {
+    padding: 18px 10px;
+  }
+
+  .booking-form {
+    padding: 14px;
+  }
+
+  .consultation-table th {
+    font-size: 10px;
+  }
+
+  .consultation-table td {
+    font-size: 9px;
+  }
+
+  .payment-status {
+    min-width: 34px;
+    min-height: 22px;
+    padding: 0 4px;
+    font-size: 9px;
   }
 }

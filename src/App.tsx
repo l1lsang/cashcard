@@ -5,15 +5,15 @@ import { saveConsultationApplication } from './services/consultationApplications
 import './App.css'
 
 type CardType = '신용카드' | '법인카드' | '체크카드'
+type OverdueStatus = '없음' | '있음'
 
 type FormValues = {
   name: string
   phone: string
-  date: string
-  time: string
-  amount: string
-  cardType: CardType
-  message: string
+  birthDate: string
+  overdueStatus: OverdueStatus
+  creditLimit: string
+  callTime: string
 }
 
 type Consultation = {
@@ -32,11 +32,10 @@ type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error'
 const initialForm: FormValues = {
   name: '',
   phone: '',
-  date: '',
-  time: '',
-  amount: '',
-  cardType: '신용카드',
-  message: '',
+  birthDate: '',
+  overdueStatus: '없음',
+  creditLimit: '',
+  callTime: '',
 }
 
 const seededAt = Date.now()
@@ -269,11 +268,10 @@ function App() {
       await saveConsultationApplication({
         name: form.name.trim(),
         phone: form.phone.trim(),
-        requestedDate: form.date,
-        requestedTime: form.time,
-        amount: form.amount.trim(),
-        cardType: form.cardType,
-        message: form.message.trim(),
+        birthDate: form.birthDate,
+        overdueStatus: form.overdueStatus,
+        creditLimit: form.creditLimit.trim(),
+        callTime: form.callTime.trim(),
       })
 
       setSubmitStatus('success')
@@ -353,67 +351,61 @@ function App() {
             </label>
 
             <label>
-              날짜
+              생년월일
               <input
                 required
                 type="date"
-                value={form.date}
+                value={form.birthDate}
                 onChange={(event) =>
-                  setForm({ ...form, date: event.target.value })
+                  setForm({ ...form, birthDate: event.target.value })
                 }
               />
             </label>
 
+            <fieldset className="choice-field">
+              <legend>카드 연체 유/무</legend>
+              <div className="segmented-control">
+                {(['없음', '있음'] as OverdueStatus[]).map((status) => (
+                  <label key={status}>
+                    <input
+                      checked={form.overdueStatus === status}
+                      name="overdueStatus"
+                      onChange={() =>
+                        setForm({ ...form, overdueStatus: status })
+                      }
+                      type="radio"
+                      value={status}
+                    />
+                    <span>{status}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
             <label>
-              시간
+              신용한도 금액
               <input
                 required
-                type="time"
-                value={form.time}
+                value={form.creditLimit}
                 onChange={(event) =>
-                  setForm({ ...form, time: event.target.value })
+                  setForm({ ...form, creditLimit: event.target.value })
                 }
+                placeholder="예: 9000만원"
               />
             </label>
 
             <label>
-              금액
+              통화 가능시간
               <input
                 required
-                value={form.amount}
+                value={form.callTime}
                 onChange={(event) =>
-                  setForm({ ...form, amount: event.target.value })
+                  setForm({ ...form, callTime: event.target.value })
                 }
-                placeholder="예: 300만원, 오백만원, 추후 협의"
+                placeholder="예: 평일 오후 2시 이후"
               />
-            </label>
-
-            <label>
-              카드 종류
-              <select
-                value={form.cardType}
-                onChange={(event) =>
-                  setForm({ ...form, cardType: event.target.value as CardType })
-                }
-              >
-                <option>신용카드</option>
-                <option>법인카드</option>
-                <option>체크카드</option>
-              </select>
             </label>
           </div>
-
-          <label className="message-field">
-            상담내용
-            <textarea
-              required
-              value={form.message}
-              onChange={(event) =>
-                setForm({ ...form, message: event.target.value })
-              }
-              placeholder="상담받고 싶은 내용을 입력해 주세요."
-            />
-          </label>
 
           <button type="submit" disabled={submitStatus === 'submitting'}>
             {submitStatus === 'submitting' ? '신청 중...' : '상담신청'}

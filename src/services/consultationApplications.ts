@@ -1,11 +1,10 @@
 export type ConsultationApplicationInput = {
   name: string
   phone: string
-  requestedDate: string
-  requestedTime: string
-  amount: string
-  cardType: string
-  message: string
+  birthDate: string
+  overdueStatus: string
+  creditLimit: string
+  callTime: string
 }
 
 export async function saveConsultationApplication(
