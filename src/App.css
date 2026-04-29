@@ -418,6 +418,14 @@ textarea::placeholder {
     padding: 48px 10px 54px;
   }
 
+  .trust-inner {
+    width: min(430px, 100%);
+  }
+
+  .trust-inner h2 {
+    font-size: 28px;
+  }
+
   .stat-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
