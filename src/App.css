@@ -357,11 +357,23 @@ textarea::placeholder {
   }
 
   .stat-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .stat-card {
-    min-height: 144px;
+    min-height: 104px;
+    padding: 18px 6px;
+  }
+
+  .stat-card strong {
+    font-size: clamp(24px, 8vw, 34px);
+  }
+
+  .stat-card span {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.35;
   }
 
   .booking-section,
