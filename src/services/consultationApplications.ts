@@ -3,7 +3,7 @@ export type ConsultationApplicationInput = {
   phone: string
   requestedDate: string
   requestedTime: string
-  amount: number
+  amount: string
   cardType: string
   message: string
 }

@@ -2,7 +2,6 @@ import { cert, getApps, initializeApp } from 'firebase-admin/app'
 import { FieldValue, getFirestore } from 'firebase-admin/firestore'
 
 const allowedCardTypes = new Set(['신용카드', '법인카드', '체크카드'])
-const moneyFormatter = new Intl.NumberFormat('ko-KR')
 
 function getRequiredEnv(name) {
   const value = process.env[name]
@@ -49,14 +48,8 @@ function assertString(value, field, maxLength) {
 }
 
 function normalizeApplication(rawBody) {
-  const amount = Number(rawBody.amount)
   const cardType = assertString(rawBody.cardType, '카드 종류', 20)
-
-  if (!Number.isFinite(amount) || amount < 5000000) {
-    const error = new Error('금액은 500만원 이상이어야 합니다.')
-    error.statusCode = 400
-    throw error
-  }
+  const amount = assertString(rawBody.amount, '금액', 80)
 
   if (!allowedCardTypes.has(cardType)) {
     const error = new Error('지원하지 않는 카드 종류입니다.')
@@ -75,10 +68,6 @@ function normalizeApplication(rawBody) {
   }
 }
 
-function formatAmount(amount) {
-  return `${moneyFormatter.format(Math.round(amount / 10000))}만원`
-}
-
 function formatSubmittedAt(value) {
   const date = new Date(value)
   const minutes = String(date.getMinutes()).padStart(2, '0')
@@ -94,7 +83,7 @@ function buildTelegramMessage(application, clientSubmittedAt) {
     `연락처: ${application.phone}`,
     `예약 날짜: ${application.requestedDate}`,
     `예약 시간: ${application.requestedTime}`,
-    `금액: ${formatAmount(application.amount)}`,
+    `금액: ${application.amount}`,
     `카드 종류: ${application.cardType}`,
     `신청 시간: ${formatSubmittedAt(clientSubmittedAt)}`,
     '',

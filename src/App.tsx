@@ -29,14 +29,12 @@ type Consultation = {
 
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error'
 
-const minimumAmount = 5_000_000
-
 const initialForm: FormValues = {
   name: '',
   phone: '',
   date: '',
   time: '',
-  amount: String(minimumAmount),
+  amount: '',
   cardType: '신용카드',
   message: '',
 }
@@ -256,15 +254,13 @@ function App() {
     event.preventDefault()
     setSubmitStatus('submitting')
 
-    const amount = Math.max(Number(form.amount), minimumAmount)
-
     try {
       await saveConsultationApplication({
         name: form.name.trim(),
         phone: form.phone.trim(),
         requestedDate: form.date,
         requestedTime: form.time,
-        amount,
+        amount: form.amount.trim(),
         cardType: form.cardType,
         message: form.message.trim(),
       })
@@ -373,13 +369,11 @@ function App() {
               금액
               <input
                 required
-                min={minimumAmount}
-                step="100000"
-                type="number"
                 value={form.amount}
                 onChange={(event) =>
                   setForm({ ...form, amount: event.target.value })
                 }
+                placeholder="예: 300만원, 오백만원, 추후 협의"
               />
             </label>
 
