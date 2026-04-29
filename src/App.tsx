@@ -45,7 +45,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 8,
     name: '오지훈',
-    amount: 8_200_000,
+    amount: 80_200_000,
     date: '2026-05-03',
     time: '10:20',
     cardType: '신용카드',
@@ -55,7 +55,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 7,
     name: '조민서',
-    amount: 6_200_000,
+    amount: 60_200_000,
     date: '2026-05-03',
     time: '11:40',
     cardType: '법인카드',
@@ -65,7 +65,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 6,
     name: '한도윤',
-    amount: 10_000_000,
+    amount: 100_000_000,
     date: '2026-05-03',
     time: '13:10',
     cardType: '체크카드',
@@ -75,7 +75,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 5,
     name: '박서준',
-    amount: 5_200_000,
+    amount: 50_200_000,
     date: '2026-05-02',
     time: '17:30',
     cardType: '신용카드',
@@ -85,7 +85,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 4,
     name: '한유진',
-    amount: 5_700_000,
+    amount: 50_700_000,
     date: '2026-05-02',
     time: '15:20',
     cardType: '법인카드',
@@ -95,7 +95,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 3,
     name: '서하늘',
-    amount: 7_100_000,
+    amount: 70_100_000,
     date: '2026-05-01',
     time: '14:30',
     cardType: '법인카드',
@@ -105,7 +105,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 2,
     name: '이서연',
-    amount: 8_900_000,
+    amount: 80_900_000,
     date: '2026-05-02',
     time: '11:00',
     cardType: '신용카드',
@@ -115,7 +115,7 @@ const seedConsultations: Consultation[] = [
   {
     id: 1,
     name: '최지우',
-    amount: 5_100_000,
+    amount: 50_100_000,
     date: '2026-04-30',
     time: '16:00',
     cardType: '체크카드',
