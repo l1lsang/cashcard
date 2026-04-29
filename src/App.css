@@ -413,20 +413,20 @@ textarea::placeholder {
 
 @media (max-width: 920px) {
   .hero-section {
-    min-height: auto;
-    padding: 14px 12px 22px;
-    background: #f5f7fa;
+    min-height: 100svh;
+    padding: 0;
+    background: #ffffff;
   }
 
   .hero-image {
     width: 100%;
     max-width: 100%;
-    height: auto;
-    max-height: calc(100svh - 36px);
-    object-fit: contain;
+    height: 100svh;
+    max-height: none;
+    object-fit: cover;
     object-position: center;
-    border-radius: 8px;
-    box-shadow: 0 14px 34px rgba(24, 34, 54, 0.12);
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .trust-section {
