@@ -285,11 +285,11 @@ function App() {
   return (
     <main className="cashcard-page">
       <section className="hero-section" aria-labelledby="page-title">
-        <h1 id="page-title">캐쉬카드 상담 예약</h1>
+        <h1 id="page-title">카드빵 상담 예약</h1>
         <img
           className="hero-image"
           src={serviceImage}
-          alt="캐쉬카드 신용카드 법인카드 현금화 상담 서비스"
+          alt="카드빵 신용카드 법인카드 현금화 상담 서비스"
         />
       </section>
 
@@ -299,7 +299,7 @@ function App() {
         aria-labelledby="trust-title"
       >
         <div className="trust-inner">
-          <h2 id="trust-title">많은 고객들이 캐쉬카드와 함께합니다</h2>
+          <h2 id="trust-title">많은 고객들이 카드빵과 함께합니다</h2>
           <div className="stat-grid">
             {statItems.map((item, index) => (
               <article className="stat-card" key={item.label}>
@@ -383,7 +383,7 @@ function App() {
             </fieldset>
 
             <label>
-              신용한도 금액
+              신청하실 금액
               <input
                 required
                 value={form.creditLimit}
